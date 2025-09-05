@@ -3,15 +3,81 @@
 <head>
     <title>Projects</title>
     <link rel="stylesheet" href="/static/style.css">
+    <!-- Font Awesome for icons for social media -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-<h1>Current projects I've done</h1>
-    <ul>
-        <li><a href="https://github.com/Arb1AB/DP_Final" target="_blank">DP_Final - My Final Thesis</a></li>
-        <li><a href="https://github.com/Arb1AB/PythonP" target="_blank">PythonP - A simple calculator</a></li>
-        <li><a href="https://github.com/Arb1AB/PMP_ZADA" target="_blank">PMP_ZADA - A simple project management app for exams</a></li>
-    </ul>
+    <!-- Background Animation -->
+    <canvas id="Matrix"></canvas>
+    <script src="/static/matrix.js"></script>
 
-    <a href="/">Back to Home</a>
+    <!-- Projects Album -->
+    <div class="projects-album">
+        <h1>My Projects</h1>
+
+        <div class="project-display">
+            <div class="project-card active">
+                <i class="fas fa-book"></i>
+                <h2>DP_Final</h2>
+                <p>My Final Thesis Project</p>
+                <a href="https://github.com/Arb1AB/DP_Final" target="_blank">View on GitHub</a>
+            </div>
+
+            <div class="project-card">
+                <i class="fas fa-calculator"></i>
+                <h2>PythonP</h2>
+                <p>A simple calculator in Python</p>
+                <a href="https://github.com/Arb1AB/PythonP" target="_blank">View on GitHub</a>
+            </div>
+
+            <div class="project-card">
+                <i class="fas fa-tasks"></i>
+                <h2>PMP_ZADA</h2>
+                <p>A project management app for exams</p>
+                <a href="https://github.com/Arb1AB/PMP_ZAD.git" target="_blank">View on GitHub</a>
+            </div>
+
+            <div class="project-card">
+                <i class="fas fa-globe"></i>
+                <h2>Personal Website</h2>
+                <p>My personal portfolio website</p>
+                <a href="https://github.com/Arb1AB/Personal_Website.git" target="_blank">View on GitHub</a>
+            </div> <!-- ✅ properly closed -->
+        </div>
+
+        <div class="album-controls">
+            <button id="prev"><i class="fas fa-arrow-left"></i> Prev</button>
+            <button id="next">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="back-home">
+            <a href="/" class="project-btn"><i class="fas fa-home"></i> Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.project-card');
+        let current = 0;
+
+        function showCard(index, direction = 'right') {
+            cards.forEach((card, i) => {
+                card.classList.remove('active', 'slide-in-right', 'slide-in-left');
+                if (i === index) {
+                    card.classList.add('active');
+                    card.classList.add(direction === 'right' ? 'slide-in-right' : 'slide-in-left');
+                }
+            });
+        }
+
+        document.getElementById('next').addEventListener('click', () => {
+            current = (current + 1) % cards.length;
+            showCard(current, 'right');
+        });
+
+        document.getElementById('prev').addEventListener('click', () => {
+            current = (current - 1 + cards.length) % cards.length;
+            showCard(current, 'left');
+        });
+    </script>
 </body>
 </html>
